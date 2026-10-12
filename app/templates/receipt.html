@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Split receipt</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
+</head>
+
+<body>
+
+<main class="container">
+
+    <!-- STEP 1: CHECK RECEIPT -->
+
+    <section id="receipt-step">
+
+        <h1>I tried my best</h1>
+        <p>Amend as you see fit!</p>
+
+        <div id="items" class="items">
+
+            {% for item in receipt.items %}
+
+                <div class="item">
+
+                    <input
+                        class="description"
+                        type="text"
+                        value="{{ item.description }}"
+                    >
+
+                    <input
+                        class="price"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value="{{ item.final_price }}"
+                    >
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="total">
+            <span>Receipt total</span>
+
+            <strong>
+                {% if receipt.total is not none %}
+                    £{{ receipt.total }}
+                {% else %}
+                    Not found
+                {% endif %}
+            </strong>
+        </div>
+
+        <button id="receipt-continue" type="button">
+            Continue
+        </button>
+
+    </section>
+
+
+    <!-- STEP 2: ADD PEOPLE -->
+
+    <section id="people-step" hidden>
+
+        <h1>Name yourselves</h1>
+
+        <p>Add who bought something.</p>
+
+        <div class="person-entry">
+
+            <input
+                id="person-name"
+                type="text"
+                placeholder="Name"
+            >
+
+            <button id="add-person" type="button">
+                Add
+            </button>
+
+        </div>
+
+        <div id="people-list" class="people-list"></div>
+
+        <button id="people-continue" type="button">
+            Continue
+        </button>
+
+    </section>
+
+
+    <!-- STEP 3: ASSIGN ITEMS -->
+
+    <section id="split-step" hidden>
+
+        <h1>Whos got what?</h1>
+
+        <p>
+            Everyone is baseline assumed involved -
+            Tap a name to EXCLUDE them from responsibility.
+        </p>
+
+        <div id="split-items"></div>
+
+        <button id="calculate" type="button">
+            Calculate
+        </button>
+
+    </section>
+
+
+    <!-- STEP 4: RESULTS -->
+
+    <section id="results-step" hidden>
+
+        <h1>youre welcome</h1>
+
+        <div id="results"></div>
+
+        <button
+            type="button"
+            onclick="window.location.href='/'"
+        >
+            Split another one then i guess
+        </button>
+
+        <div class="footer">
+            <p>© 2026 AVoce Industries. All rights reserved.</p>
+            <p>come again soon!</p>
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

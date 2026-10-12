@@ -1,0 +1,337 @@
+:root {
+    --background: #ffcad4;
+    --surface: #dffaf8;
+
+    --text: #d85b82;
+    --text-muted: #81364e;
+
+    --primary: #d85b82;
+    --primary-hover: #bd496e;
+    --selected: #f6bfd0;
+    --unselected: #f7d0dc;
+
+    --border: #e2e2de;
+
+    --radius: 14px;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--background);
+    color: var(--text);
+}
+
+
+.container {
+    width: min(100% - 32px, 560px);
+    margin: 0 auto;
+    padding: 48px 0;
+}
+
+
+h1 {
+    margin: 0 0 8px;
+
+    font-size: 32px;
+    line-height: 1.1;
+}
+
+
+p {
+    margin-top: 0;
+    color: var(--text-muted);
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+button {
+    width: 100%;
+
+    padding: 14px 18px;
+
+    border: 0;
+    border-radius: var(--radius);
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+
+/* ---------- UPLOAD ---------- */
+
+.upload {
+    display: grid;
+    gap: 12px;
+
+    margin: 24px 0 16px;
+    padding: 18px;
+
+    border: 1px dashed var(--primary);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+
+    font-weight: 600;
+}
+
+
+.upload input {
+    width: 100%;
+
+    font-size: 16px;
+}
+
+
+/* ---------- RECEIPT ITEMS ---------- */
+
+.items {
+    display: grid;
+    gap: 10px;
+
+    margin: 32px 0;
+}
+
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    gap: 8px;
+}
+
+
+.item input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    font-size: 16px;
+}
+
+
+.price {
+    text-align: right;
+}
+
+
+.total {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 24px 0;
+    padding: 18px 0;
+
+    border-top: 1px solid var(--border);
+
+    font-size: 18px;
+}
+
+
+/* ---------- ADD PEOPLE ---------- */
+
+.person-entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+
+    margin: 32px 0 16px;
+}
+
+
+.person-entry input {
+    min-width: 0;
+
+    padding: 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+
+.person-entry button {
+    width: auto;
+}
+
+
+.people-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 32px;
+}
+
+
+.person-chip {
+    padding: 8px 14px;
+
+    border-radius: 100px;
+
+    background: var(--selected);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* ---------- ITEM ASSIGNMENT ---------- */
+
+.split-item {
+    margin: 12px 0;
+    padding: 18px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+}
+
+
+.split-item > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+
+.assignment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+
+.assignment-buttons button {
+    width: auto;
+
+    padding: 8px 14px;
+
+    background: var(--unselected);
+    color: var(--text-muted);
+
+    border: 1px solid var(--border);
+    border-radius: 100px;
+
+    font-size: 14px;
+}
+
+
+.assignment-buttons button:hover {
+    background: var(--selected);
+}
+
+
+.assignment-buttons button.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+
+.assignment-buttons button.selected:hover {
+    background: var(--primary-hover);
+}
+
+
+#calculate {
+    margin-top: 24px;
+}
+
+
+/* ---------- RESULTS ---------- */
+
+.person-result {
+    margin: 12px 0;
+    padding: 18px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+}
+
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 20px;
+}
+
+
+.breakdown {
+    margin-top: 12px;
+}
+
+
+.breakdown summary {
+    cursor: pointer;
+
+    color: var(--primary);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.breakdown-items {
+    margin-top: 12px;
+}
+
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 6px 0;
+
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+
+.breakdown-item span:first-child {
+    flex: 1;
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer {
+    margin-top: 24px;
+
+    text-align: center;
+}

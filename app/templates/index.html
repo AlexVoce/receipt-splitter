@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+    <title>Split</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <main class="container">
+
+        <h1>Split!!!</h1>
+        <p>take picture of receipt make sure its all in the photo and upload</p>
+
+        <form action="/scan" method="post" enctype="multipart/form-data">
+
+            <label class="upload">
+                Let me into your phone 
+                <input
+                    type="file"
+                    name="receipt_image"
+                    accept="image/*"
+                    required
+                >
+            </label>
+
+            <button type="submit">
+                Scan receipt
+            </button>
+
+        </form>
+
+    </main>
+</body>
+</html>
