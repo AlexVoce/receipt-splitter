@@ -5,7 +5,11 @@ from tempfile import NamedTemporaryFile
 import Quartz
 import Vision
 from PIL import Image, ImageOps
+from pillow_heif import register_heif_opener
 
+
+# Lets Pillow open HEIC/HEIF photos, the default format on iPhones.
+register_heif_opener()
 
 MIN_SHORTEST_SIDE = 1000
 
@@ -19,7 +23,7 @@ class TextObservation:
     confidence: float
 
 
-def _normalise_image(image_path: str) -> str:
+def _normalise_image(image_path: str, rotation: float = 0.0) -> str:
     path = Path(image_path).resolve()
 
     if not path.exists():
@@ -31,6 +35,16 @@ def _normalise_image(image_path: str) -> str:
 
         # Convert to RGB so we can reliably save as JPEG.
         image = image.convert("RGB")
+
+        # Rotation in degrees, anticlockwise. Used to level receipts
+        # photographed at an angle (see receipt.scan).
+        if rotation:
+            image = image.rotate(
+                rotation,
+                resample=Image.BICUBIC,
+                expand=True,
+                fillcolor="white",
+            )
 
         # Vision struggles with small text in low-resolution photos,
         # misreading £ symbols and digits. Upscaling helps a lot.
@@ -49,8 +63,11 @@ def _normalise_image(image_path: str) -> str:
     return temp_file.name
 
 
-def extract_text(image_path: str) -> list[TextObservation]:
-    normalised_path = _normalise_image(image_path)
+def extract_text(
+    image_path: str,
+    rotation: float = 0.0,
+) -> list[TextObservation]:
+    normalised_path = _normalise_image(image_path, rotation)
 
     path_bytes = normalised_path.encode("utf-8")
 

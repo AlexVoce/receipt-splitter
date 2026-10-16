@@ -5,9 +5,7 @@ from fastapi import FastAPI, File, Request, UploadFile
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from receipt.layout import reconstruct_lines
-from receipt.parsers import parse_receipt
-from receipt.vision import extract_text
+from receipt.scan import scan_receipt as scan_receipt_image
 
 
 app = FastAPI()
@@ -44,9 +42,7 @@ async def scan_receipt(
         temp_file.write(contents)
         image_path = temp_file.name
 
-    observations = extract_text(image_path)
-    lines = reconstruct_lines(observations)
-    receipt = parse_receipt(lines)
+    receipt, _ = scan_receipt_image(image_path)
 
     return templates.TemplateResponse(
         request=request,

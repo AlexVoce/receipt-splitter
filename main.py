@@ -1,14 +1,12 @@
 from decimal import Decimal
 from pathlib import Path
 
-from receipt.layout import reconstruct_lines
-from receipt.parsers import parse_receipt
-from receipt.vision import extract_text
+from receipt.scan import scan_receipt
 
 
 receipt_folder = Path("example_receipts")
 
-extensions = ["jpg", "jpeg", "webp"]
+extensions = ["jpg", "jpeg", "webp", "heic"]
 
 image_paths = sorted(
     path
@@ -35,9 +33,7 @@ def print_items(receipt):
 
 
 for image_path in image_paths:
-    observations = extract_text(str(image_path))
-    lines = reconstruct_lines(observations)
-    receipt = parse_receipt(lines)
+    receipt, lines = scan_receipt(str(image_path))
 
     if receipt.total is None:
         print(

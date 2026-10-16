@@ -14,7 +14,7 @@ All I ask is that you take a nice picture of the receipt and upload it. name the
 
 ## Supported receipts
 
-Dedicated parsers handle **Tesco**, **Sainsbury's** and **Waitrose** receipts, including Clubcard and Nectar discounts and multibuy deals. Receipts from other shops go through a generic parser, which may need more fixing by hand. Cant promise itll work for every receipt, but she's a strong lass who should be able to handle most of them.
+Dedicated parsers handle **Tesco**, **Sainsbury's** and **Waitrose** receipts, including Clubcard and Nectar discounts and multibuy deals. Receipts from other shops go through a generic parser, which may need more fixing by hand. Cant promise itll work for every receipt, but she's a strong lass who should be able to handle most of them. (It now works for heic files and updated to try to work better with crumpled receipts but she's not perfect).
 
 ## Requirements
 
@@ -26,7 +26,7 @@ Dedicated parsers handle **Tesco**, **Sainsbury's** and **Waitrose** receipts, i
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install fastapi uvicorn jinja2 python-multipart pillow \
+pip install fastapi uvicorn jinja2 python-multipart pillow pillow-heif \
     pyobjc-framework-Vision pyobjc-framework-Quartz pytest
 
 uvicorn app.server:app --reload
